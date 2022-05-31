@@ -1,0 +1,15 @@
+body{
+  background-color: white;
+  color: black;
+}
+
+
+.modo-oscuro{
+  background-color: black;
+  color: white;
+}
+
+.una{
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  font-size: 30px;
+}

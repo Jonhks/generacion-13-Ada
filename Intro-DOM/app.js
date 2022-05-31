@@ -36,26 +36,26 @@
 
 // const todosElementos = document.querySelectorAll('p');
 // const todosElementos = document.querySelectorAll('.parrafo');
-// const todosElementos = document.querySelectorAll('#parrafo-id');
+// const todosElementos = document.querySelectorAll('#parrafo-id');//[elem1]
 
-// const unicoElemeto = document.querySelector('#parrafo-id-2');
-const quitarClase = document.querySelector('#parrafo-id');
-const estilosElemento = document.querySelector('#parrafo-id-2');
+const unicoElemeto = document.querySelector('#parrafo-id-2');
+// const quitarClase = document.querySelector('#parrafo-id'); //elemt1
+// const estilosElemento = document.querySelector('#parrafo-id-2');
 
 // unicoElemeto.classList.add('añadida');
 // quitarClase.classList.remove('otra');
 
 // quitarClase.classList.toggle('otra');
 
-// console.log(unicoElemeto);
+console.log(unicoElemeto);
 
-estilosElemento.style.color = 'red'
-estilosElemento.style.backgroundColor = 'black'
+// estilosElemento.style.color = 'red'
+// estilosElemento.style.backgroundColor = 'black'
 
-console.log(quitarClase.classList.contains('parrafo'))
+// console.log(quitarClase.classList.contains('parrafo'))
 
 // const img = document.createElement('img');
-// img.setAttribute('src');
+// img.setAttribute('src', 'url');
 // img.setAttribute('alt');
 
 

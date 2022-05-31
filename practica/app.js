@@ -82,16 +82,18 @@
 // document.write(`<nav>Hola ${nombre} Bienvenid@</nav>`)
 
 
-const prueba = (event) => {
-  // alert('Se le dio click al boton y disparo el evento!')
-  console.log(event)
-}
+// const prueba = (event) => {
+//   // alert('Se le dio click al boton y disparo el evento!')
+//   console.log(event)
+// }
 
-const boton = document.getElementById('boton');
+// prueba()
 
-// boton.addEventListener('click', (e) => {
-//   // alert('funcionando desde el evento!')
-//   console.log(e.target)
-// })
+// const boton = document.getElementById('boton');
 
-boton.addEventListener('click', prueba)
+// // boton.addEventListener('click', (e) => {
+// //   // alert('funcionando desde el evento!')
+// //   console.log(e.target)
+// // })
+
+// boton.addEventListener('click', prueba)

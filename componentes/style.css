@@ -1,0 +1,285 @@
+/* Codigo Css para el modal */
+
+/* .modal-contenido{
+  background-color: aqua;
+  width: 300px;
+  padding: 10px 20px;
+  margin: 20% auto;
+  position: relative;
+}
+
+.modal{
+  background-color: rgba(0, 0, 0, .8);
+  position: fixed;
+  top: 0;
+  right: 0;
+  left: 0;
+  bottom: 0;
+  opacity: 0;
+  transition: all 1s;
+  pointer-events: none;
+}
+
+.btn-cerrar{
+  text-align: right;
+}
+
+
+#mi-modal:target{
+  opacity: 1;
+  pointer-events: auto;
+} */
+
+
+/* Código del Toggle */
+
+.toggle-btns{
+  position: absolute;
+  top: 10%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.toggle-btn{
+  margin: 20px;
+}
+
+.toggle-btn label{
+  position: relative;
+  display: block;
+  width: 100px;
+  height: 50px;
+  background-color: #aaa;
+  border-radius: 30px;
+  transition: all 300ms linear;
+}
+
+
+.toggle-btn label:before{
+  position: relative;
+  content: '';
+  width: 40px;
+  height: 40px;
+  background-color: #ddd;
+  display: block;
+  border-radius: 50%;
+  top: 5px;
+  left: 10px;
+  transition: all 300ms linear;
+}
+
+.toggle-btn.red input:checked + label{
+  background-color: orangered;
+}
+
+.toggle-btn input:checked + label{
+  background-color: #00acee;
+}
+
+.toggle-btn input:checked + label::before{
+  left: 50px;
+}
+
+.toggle-btn input{
+  display: none;
+}
+
+
+/* Código de collapse */
+
+/* body{
+  margin: 0;
+  padding: 0;
+  background-color: white;
+  font-size: 14px;
+  min-height: 100vh;
+  overflow: hidden;
+}
+
+*{
+  margin: 0;
+  padding: 0;
+}
+
+.wrapper{
+  display: flex;
+  padding-top: 50px;
+  justify-content: center;
+}
+
+.collapside{
+  max-width: 450px;
+  overflow: hidden;
+}
+
+.collapside label{
+  position: relative;
+  font-weight: 600;
+  color: #1c1c6b;
+  display: block;
+  margin-bottom: 10px;
+  background-color: cyan;
+  padding: 15px 0;
+  border-radius: 4px;
+}
+
+.collapside label::after{
+  content: '';
+  background-image: url(./bottom-arrow.png);
+  background-size: cover;
+  position: absolute;
+  right: 51px;
+  top: 15px;
+  width: 18px;
+  height: 18px;
+}
+
+.collapside-text{
+  max-height: 1px;
+  overflow: hidden;
+  border-radius: 4px;
+  line-height: 1.4;
+  top:  -100%;
+  opacity: .5;
+  transition: all .8s ease;
+}
+
+.collapside input:checked ~ .collapside-text{
+  max-height: 300px;
+  padding-bottom: 25px;
+  background-color: gray;
+  opacity: 1;
+  top: 0;
+}
+
+.collapside input {
+  display: none;
+} */
+
+
+/* Código de SideBar */
+
+*, :before, :after {
+  box-sizing: border-box;
+}
+
+.unstyled {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+.unstyled a {
+  text-decoration: none;
+}
+
+.header {
+  position: fixed;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  width: 17.5em;
+  background: #35302D;
+}
+
+.logo {
+  text-transform: lowercase;
+  font: 300 2em "Source Sans Pro", Helvetica, Arial, sans-serif;
+  text-align: center;
+  padding: 0;
+  margin: 0;
+}
+.logo a {
+  display: block;
+  padding: 1em 0;
+  color: #DFDBD9;
+  text-decoration: none;
+  transition: 0.15s linear color;
+}
+.logo a:hover {
+  color: #fff;
+}
+.logo a:hover span {
+  color: #DF4500;
+}
+.logo span {
+  font-weight: 700;
+  transition: 0.15s linear color;
+}
+
+.main-nav ul {
+  border-top: solid 1px #3C3735;
+}
+.main-nav li {
+  border-bottom: solid 1px #3C3735;
+}
+.main-nav a {
+  padding: 1.1em 0;
+  color: #DFDBD9;
+  font: 400 1.125em "Source Sans Pro", Helvetica, Arial, sans-serif;
+  text-align: center;
+  text-transform: lowercase;
+}
+.main-nav a:hover {
+  color: #fff;
+}
+
+.social-links {
+  border-bottom: solid 1px #3C3735;
+}
+.social-links li {
+  width: 25%;
+  border-left: solid 1px #3C3735;
+}
+.social-links li:first-child {
+  border: none;
+}
+.social-links a {
+  display: block;
+  height: 5.5em;
+  text-align: center;
+  color: #3C3735;
+  font: 0.75em/5.5em "Source Sans Pro", Helvetica, Arial, sans-serif;
+}
+.social-links a:hover {
+  color: #DFDBD9;
+}
+
+.list-hover-slide li {
+  position: relative;
+  overflow: hidden;
+}
+.list-hover-slide a {
+  display: block;
+  position: relative;
+  z-index: 1;
+  transition: 0.35s ease color;
+}
+.list-hover-slide a:before {
+  content: "";
+  display: block;
+  z-index: -1;
+  position: absolute;
+  left: -100%;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  border-right: solid 5px #DF4500;
+  background: #3C3735;
+  transition: 0.35s ease left;
+}
+.list-hover-slide a.is-current:before, .list-hover-slide a:hover:before {
+  left: 0;
+}
+
+.oculto{
+  display: none;
+}
+
+.home, .about, .contact, .blog{
+  margin-left: 20%;
+}
+
+.mia{
+  background-color: black;
+  width: 300px;
+}

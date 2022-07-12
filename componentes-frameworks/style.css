@@ -1,0 +1,13 @@
+.mi-nav{
+  height: 13vh;
+}
+
+.oculto{
+  display: none;
+}
+
+.contenedor-card{
+  height: 40vh;
+  display: flex;
+  align-items: center;
+}

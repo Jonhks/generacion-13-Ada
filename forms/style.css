@@ -1,0 +1,9 @@
+.prueba{
+  width: 100%;
+  height: 70vh;
+}
+
+.first-name:focus{
+  border-bottom: 1px solid black !important;
+  box-shadow: 0 1px 0 0 black !important;
+}

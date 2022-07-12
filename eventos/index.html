@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="./style.css">
+  <title>Document</title>
+</head>
+<body>
+
+
+  <!-- event handler -->
+
+  <!-- Controladores de eventos
+Para reaccionar con eventos podemos asignar un handler (controlador) el cual es una función que se ejecuta en caso de un evento. Los handlers son una forma de ejecutar código JavaScript en caso de acciones por parte del usuario. -->
+
+  <!-- propagacion de evento --> 
+  
+
+  <!-- <style>
+    body * {
+      margin: 10px;
+      border: 1px solid blue;
+    }
+  </style>
+  
+  <form onclick="alert('form')">FORM
+    <div onclick="alert('div')">DIV
+      <p onclick="alert('p')">P</p>
+    </div>
+  </form>
+
+
+  <div onclick="alert(`No se propagó hasta aquí`)">
+  <button onclick="event.stopPropagation()">Haz clic</button>
+</div> -->
+
+
+<!-- eventos del mouse -->
+
+<!-- <p onclick="ejemplo(event,1)"><b>onclick</b>se produce cuando el usuario hace click en un elemento</p> -->
+<!-- <p oncontextmenu="ejemplo(event,2)"><b>onContextMenu</b>Cuando el usuario hace click con el boton derecho a un elemento para abrir un menu contextual</p> -->
+<!-- <p ondblclick="ejemplo(event,3)"><b>ondblclick</b> Cuando se le da doble click a un elemento</p> -->
+<!-- <p onmousedown="ejemplo(event,4)"><b>onmousedown</b> cuando el usuario pulsa un boton del raton sobre un elemento </p> -->
+<!-- <p onmouseenter="ejemplo(event,5)"><b>onmouseenter</b> Cuando el puntero se mueve sobre un elemento</p> -->
+<!-- <p onmouseleave="ejemplo(event,6)"><b>onmouseleave</b> Cuando el puntero se mueve fuera de un elemento</p> -->
+<!-- <p onmousemove="ejemplo(event,7)"><b>onmousemove</b> Cuando el cursor se mueve dentro del elemento</p> -->
+<!-- <p onmouseover="ejemplo(event,8)"><b>onmouseover</b> cuando el cursor se mueve dentro de un elemento o uno de sus hijos</p> -->
+<!-- <p onmouseout="ejemplo(event,9)"><b>onmouseout</b> Cuando el puntero se mueve fuera de un elemento o uno de sus hijos</p> -->
+<!-- <p onmouseup="ejemplo(event,10)"><b>onmouseup</b> Cuando el usuario libera un boton del raton sobre un elemento</p> -->
+
+
+
+<!-- <button id="boton">Da click aqui</button>  -->
+<p id="render-text"></p>
+<input id="input"  type="text"> 
+
+
+<!-- eventos del teclado -->
+
+<form action="">
+
+  <button type="submit" id="modo-oscuro">Modo oscuro</button>
+</form>
+
+
+
+
+
+<script src="./app.js"></script>
+</body>
+</html>

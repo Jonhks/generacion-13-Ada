@@ -1,0 +1,29 @@
+*{
+  box-sizing: border-box;
+}
+
+#calle:focus{
+  background-color: aqua;
+  /* border: 4px solid red; */
+  outline: 2px solid blue;
+}
+
+#numero:focus{
+  background-color: blueviolet;
+}
+
+#departamento:focus{
+  background-color: aquamarine;
+}
+
+#boton:focus{
+  background-color: green;
+}
+
+.prueba:hover{
+  color: red;
+}
+
+.prueba:focus{
+  color: blue;
+}

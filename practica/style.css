@@ -1,0 +1,11 @@
+/* .estilos{
+  font-size: 20px;
+  color: red;
+  font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+  text-align: center;
+} */
+
+body * {
+  margin: 10px;
+  border: 1px solid blue;
+}

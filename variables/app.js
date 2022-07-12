@@ -148,6 +148,7 @@ let decremento = 10;
 // decremento--
 
 // decremento = decremento - (decremento * .30);
+<<<<<<< HEAD
 // decremento = decremento - 5;
 
 // console.log(decremento)
@@ -164,3 +165,18 @@ let decremento = 10;
 
 
 const nombre = 'Jonh';
+=======
+decremento = decremento - 5;
+
+console.log(decremento)
+
+
+var add = function( x, y ){
+    return x + y;
+}
+console.log(add2(2,2))
+
+function add2( x, y ){
+    return x + y;
+  }
+>>>>>>> 8ce84a9732336cc72960f63fc20edca58065e09f

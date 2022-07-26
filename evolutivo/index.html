@@ -108,7 +108,8 @@
     integrity="sha512-1PKOgIY59xJ8Co8+NE6FZ+LOAZKjy+KY8iq0G4B3CyeY6wYHN3yt9PW0XpSriVlkMXe40PTKnXrLnZ9+fkDaog=="
     crossorigin="anonymous"
     />
-    <link rel="stylesheet" href="styles.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/uuid/8.1.0/uuidv4.min.js">
+    <link rel="stylesheet" href="./style.css" />
     <title>AhorrADAs</title>
   </head>
   <body>
@@ -172,6 +173,7 @@
                       type="text"
                       name=""
                       id="descripcion-input"
+                      required
                     />
                   </div>
                 </div>
@@ -263,6 +265,7 @@
                       type="text"
                       name=""
                       id="editar-descripcion-input"
+                      required
                     />
                   </div>
                 </div>
@@ -549,7 +552,8 @@
                   <div class="column is-2 has-text-right">Monto</div>
                   <div class="column is-2 has-text-right">Acciones</div>
                 </div>
-                <div id="operaciones"></div>
+                <div id="operaciones">
+                </div>
               </div>
               <div class="my-6 py-6" id="sin-operaciones">
                 <figure class="image">

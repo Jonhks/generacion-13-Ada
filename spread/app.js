@@ -140,7 +140,6 @@ const operaciones =[
     categoria: 'comida',
     fecha: '18/07/2022',
     descripcion: 'Desayuno',
-    acciones: ['editar', 'borrar']
   },
   {
     id: 2,
@@ -148,7 +147,6 @@ const operaciones =[
     categoria: 'comida',
     fecha: '18/07/2022',
     descripcion: 'cena',
-    acciones: ['editar', 'borrar']
   },
   {
     id: 3,
@@ -156,7 +154,6 @@ const operaciones =[
     categoria: 'transporte',
     fecha: '18/07/2022',
     descripcion: 'gasolina',
-    acciones: ['editar', 'borrar']
   },
 ]  
 

@@ -1,90 +1,3 @@
-<!-- <!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous">
-  <link rel="stylesheet" href="./style.css">
-  <title>Evolutivo</title>
-</head>
-<body>
-
-  <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-    <div class="container-fluid">
-      <a class="navbar-brand" href="#">Navbar</a>
-      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-      </button>
-      <div class="collapse navbar-collapse" id="navbarNav">
-        <ul class="navbar-nav">
-          <li class="nav-item">
-            <a class="nav-link active" aria-current="page" href="#">Home</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="#">Features</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="#">Pricing</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link disabled">Disabled</a>
-          </li>
-        </ul>
-      </div>
-    </div>
-  </nav>
-
-  <div class="container">
-    <div class="row justify-content-center">
-      <div class="col-md-8">
-        <form class="shadow-lg p-3 mb-5 bg-body rounded mt-5">
-          <h2 class="mb-5">Nueva Opración</h2>
-          <div class="mb-3">
-            <label for="descripcion" class="form-label">Descripcion</label>
-            <input type="text" class="form-control" id="descripcion" aria-describedby="description">
-          </div>
-          <div class="mb-3">
-            <label for="monto" class="form-label">Monto</label>
-            <input type="number" class="form-control" id="monto">
-          </div>
-          <div class="mb-3">
-            <label for="tipo" class="form-label">Tipo</label>
-            <select id="tipo" class="form-select" aria-label="Default select example">
-              <option value="gasto" selected>Gasto</option>
-              <option value="ganancia">Ganancia</option>
-            </select>
-          </div>
-          <div class="mb-3">
-            <label for="categoria" class="form-label">Categoria</label>
-            <select id="categoria" class="form-select" aria-label="Default select example">
-              <option value="comida" selected>Comida</option>
-              <option value="servicio">Servicios</option>
-              <option value="salidas">Salidas</option>
-              <option value="educacion">Educacion</option>
-              <option value="transporte">Transporte</option>
-              <option value="trabajo">Trabajo</option>
-            </select>
-          </div>
-          <div class="mb-3">
-            <label for="fecha" class="form-label">Fecha</label>
-            <input type="date" class="form-control" id="fecha" aria-describedby="description">
-          </div>
-          <button id="agregar-btn" type="submit" class="btn btn-success">Agregar</button>
-          <button id="cancelar-btn" type="submit" class="btn btn-light">Cancel</button>
-        </form>
-      </div>
-    </div>
-  </div>
-
-
-
-  
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js" integrity="sha384-pprn3073KE6tl6bjs2QrFaJGz5/SUsLqktiwsUTF55Jfv3qYSDhgCecCxMW52nD2" crossorigin="anonymous"></script>
-  <script src="./app.js"></script>
-</body>
-</html> -->
-
 <!DOCTYPE html>
 <html lang="en" class="has-background-light">
   <head>
@@ -108,6 +21,8 @@
     integrity="sha512-1PKOgIY59xJ8Co8+NE6FZ+LOAZKjy+KY8iq0G4B3CyeY6wYHN3yt9PW0XpSriVlkMXe40PTKnXrLnZ9+fkDaog=="
     crossorigin="anonymous"
     />
+    <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/css/alertify.min.css"/>
+
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/uuid/8.1.0/uuidv4.min.js">
     <link rel="stylesheet" href="./style.css" />
     <title>AhorrADAs</title>
@@ -115,7 +30,7 @@
   <body>
     <header>
       <nav
-        class="navbar has-shadow is-spaced is-primary"
+        class="navbar has-shadow is-spaced is-black"
         role="navigation"
         aria-label="main navigation"
       >
@@ -537,7 +452,7 @@
                 <div class="column has-text-right-tablet">
                   <button
                     type="button"
-                    class="button is-primary"
+                    class="button is-black"
                     id="ver-operacion"
                   >
                     + Nueva operación
@@ -621,7 +536,7 @@
                     </div>
                     <div class="column is-3 has-text-right">
                       <span
-                        class="tag is-primary is-light"
+                        class="tag is-black is-light"
                         id="categoria-mayor-ganancia"
                       ></span>
                     </div>
@@ -639,7 +554,7 @@
                     </div>
                     <div class="column is-3 has-text-right">
                       <span
-                        class="tag is-primary is-light"
+                        class="tag is-black is-light"
                         id="categoria-mayor-gasto"
                       ></span>
                     </div>
@@ -657,7 +572,7 @@
                     </div>
                     <div class="column is-3 has-text-right">
                       <span
-                        class="tag is-primary is-light"
+                        class="tag is-black is-light"
                         id="categoria-mayor-balance"
                       ></span>
                     </div>
@@ -721,7 +636,7 @@
         </div>
       </div>
     </section>
-
+    <script src="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/alertify.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/uuid/8.1.0/uuidv4.min.js"></script>
     <script src="app.js"></script>
   </body>

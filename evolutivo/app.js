@@ -23,6 +23,7 @@ const verReportes = document.getElementById('ver-reportes')
 const verOperacion = document.getElementById('ver-operacion')
 const agregaroperacionBoton = document.getElementById('agregar-operacion-boton')
 const cancelarAgregarOperacionBoton = document.getElementById('cancelar-agregar-operacion-boton')
+const filtroTipo = document.getElementById('filtro-tipo');
 
 
 const vistaBalance = document.getElementById('vista-balance')
@@ -222,6 +223,18 @@ const editarOperacion = arr => {
   editarfechaInput.valueAsDate = new Date(fecha);
 }
 
+
+filtroTipo.addEventListener('change', (e) => {
+  if(e.target.value !== 'TODOS'){
+    const porTipo = operaciones.filter(operacion => operacion.tipo === e.target.value)
+    localStorage.setItem('operaciones', porTipo)
+    pintarOperaciones(porTipo)
+  } else {
+    pintarOperaciones(operaciones)
+  }
+})
+
+
 const inicializar = () => {
   const inputsFecha = document.querySelectorAll('input[type="date"]')
   inputsFecha.forEach( input => {
@@ -233,3 +246,5 @@ const inicializar = () => {
 }
 
 window.onload = inicializar
+
+

@@ -214,17 +214,17 @@ const operaciones = [
   },
 ]
 
-console.log(operaciones.sort((a, b) => {
+// console.log(operaciones.sort((a, b) => {
   // if(a.descripcion.toLowerCase() > b.descripcion.toLowerCase()){
   //   return -1
   // } 
-  if(a.monto > b.monto){
-    return -1
-  } 
+  // if(a.monto > b.monto){
+    // return -1
+  // } 
   // if(a.descripcion.toLowerCase() > b.descripcion.toLowerCase()){
   //   return -1
   // }
-}))
+// }))
 
 // const palabras = ["xochimilco", "argentina", "perro", "gato", "lapiz", "goma", "tijeras", "papel"]
 

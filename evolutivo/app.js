@@ -36,6 +36,7 @@ const montoInput = document.getElementById('monto-input')
 const tipoOperacion = document.getElementById('tipo-operacion')
 const categoriasSelect = document.getElementById('categorias-select')
 const fechaInput = document.getElementById('fecha-input')
+const filtroOrden = document.getElementById('filtro-orden')
 const vistaEditaroperacion = document.getElementById('vista-editar-operacion')
 
 // editar operacion
@@ -46,18 +47,73 @@ const editarCategoriaSelect = document.getElementById('editar-categorias-select'
 const editarfechaInput = document.getElementById('editar-fecha-input');
 const editarOperacionBtn = document.getElementById('editar-operacion-boton');
 
+// reportes
+
+const conReportes = document.getElementById('con-reportes')
+const sinReportes = document.getElementById('sin-reportes')
+
 
 const categorias = [
-  'Comida',
-  'Servicios',
-  'Salidas',
-  'Educación',
-  'Transporte',
-  'Trabajo'
+  'comida',
+  'servicios',
+  'salidas',
+  'educación',
+  'transporte',
+  'trabajo'
 ];
 
-let operaciones = JSON.parse(localStorage.getItem('operaciones')) || [];
+// let operaciones = JSON.parse(localStorage.getItem('operaciones')) || [];
 // const operaciones = [];
+const operaciones = [
+  {
+    id: 0,
+    descripcion: 'Desayuno',
+    monto: 10,
+    categoria: 'comida',
+    tipo: 'GASTO',
+    fecha: '12/07/2022'  // ["12", "07" , "2022"] [1] = 07
+  },
+  {
+    id: 1,
+    descripcion: 'cena',
+    monto: 90,
+    categoria: 'comida',
+    tipo: 'GASTO',
+    fecha: '01/08/2022' //08
+  },
+  {
+    id: 2,
+    descripcion: 'clases',
+    monto: 100,
+    categoria: 'trabajo',
+    tipo: 'GANANCIA',
+    fecha: '23/07/2022' // 07 
+  },
+  {
+    id: 3,
+    descripcion: 'gasolina',
+    monto: 30,
+    categoria: 'transporte',
+    tipo: 'GASTO',
+    fecha: '12/06/2022' //06
+  },
+  {
+    id: 4,
+    descripcion: 'cine',
+    monto: 55,
+    categoria: 'transporte',
+    tipo: 'GASTO',
+    fecha: '8/07/2022' //07 
+  },
+  {
+    id: 5,
+    descripcion: 'sueldo',
+    monto: 1000,
+    categoria: 'transporte',
+    tipo: 'GANANCIA',
+    fecha: '12/08/2022' //08
+  },
+]
 
 
 const generarCategorias = () => {
@@ -109,14 +165,80 @@ verReportes.addEventListener('click', () => {
   vistaCategoria.classList.add('is-hidden')
   vistaReportes.classList.remove('is-hidden')
   vistaBalance.classList.add('is-hidden')
+  if(!operaciones.length){
+    conReportes.classList.add('is-hidden')
+    sinReportes.classList.remove('is-hidden')
+  } else {
+    conReportes.classList.remove('is-hidden')
+    sinReportes.classList.add('is-hidden')
+  }
+  totalPorMes(operaciones);
+  totalPorCategoria(operaciones, categorias)
 })
+
+const totalPorCategoria = (operaciones, categorias) => {
+  categorias.forEach(categoria => { // comida [{}, {}]
+    const porCategoria = operaciones.filter(operacion => operacion.categoria === categoria)
+    const porCategoriaGanancia = porCategoria.filter(operacion => operacion.tipo === 'GANANCIA').reduce((count, current) => count + current.monto ,0)
+    const porCategoriaGasto = porCategoria.filter(operacion => operacion.tipo === 'GASTO').reduce((count, current) => count + current.monto ,0)
+    // console.log(`La categoria ${categoria} su gasto es de: ${porCategoriaGasto}`)
+    // console.log(`La categoria ${categoria} su ganacia es de: ${porCategoriaGanancia}`)
+    console.log(`El balance de la categoria  ${categoria} es de ${porCategoriaGanancia - porCategoriaGasto}`)
+  })
+  // console.log(operaciones)
+  // console.log(categorias)
+}
+
+
+const totalPorMes = arr => {
+  const mesesSinRepetir = [...new Set(arr.map(operacion => 
+    operacion.fecha.split('/')[1]))].sort()
+  for (let i = 0; i < mesesSinRepetir.length; i++) {  // 06, 07 , 07 , 08 , 07  === 06
+    const operacionesPorMes = arr.filter(operacion => operacion.fecha.split('/')[1] === mesesSinRepetir[i])
+    const porTipoGanancia = operacionesPorMes.filter(operacion => 
+      operacion.tipo === 'GANANCIA' ).reduce((count, current) => count + current.monto ,0)
+    const porTipoGasto = operacionesPorMes.filter(operacion => 
+      operacion.tipo === 'GASTO' ).reduce((count, current) => count + current.monto ,0)
+    // console.log(`Esto sería del mes ${mesesSinRepetir[i]} tenemos el total de Ganancia de: ${porTipoGanancia}`)
+    // console.log(`Esto sería del mes ${mesesSinRepetir[i]} tenemos el total de Gasto de: ${porTipoGasto}`)
+  }
+}
 
 verOperacion.addEventListener('click', () => {
   vistaOperacion.classList.remove('is-hidden')
   vistaBalance.classList.add('is-hidden')
 })
 
+// db.collection("operaciones").doc("SF")
+// .onSnapshot((doc) => {
+//     console.log("Current data: ", doc);
+// .onSnapshot.forEach(doc => console.log(doc))
+// });
+
+db.collection("operaciones")
+    .onSnapshot((querySnapshot) => {
+        // var cities = [];
+        querySnapshot.forEach((doc) => {
+          // console.log(doc.data())
+            // cities.push(doc.data().name);
+        });
+        // console.log("Current cities in CA: ", cities.join(", "));
+    });
+
 agregaroperacionBoton.addEventListener('click', () => {
+  db.collection("operaciones").add({
+    first: "Una",
+    middle: "Mathison", 
+    last: "Turing",
+    born: 1912
+  })
+  .then((docRef) => {
+    console.log("Document written with ID: ", docRef.id);
+  })
+  .catch((error) => {
+    console.error("Error adding document: ", error);
+  });
+
   if (descripcionInput.value.trim().length === 0 || montoInput.value == 0) {
     alertify.error('Todos los campos son necesarios y el monto tiene que ser mayor a 0');
 
@@ -158,35 +280,49 @@ agregaroperacionBoton.addEventListener('click', () => {
 
 const pintarOperaciones = arr => {
   document.getElementById('operaciones').innerHTML = ''
-  let str = ''; // ' 
-  // se recorre el arr de operaciones por cada operacion
-  arr.forEach((operacion) => {
-    // console.log(operacion)
-    // hacemos un destructuring para sacar las propiedades
-    const {
-      id,
-      descripcion,
-      categoria,
-      fecha,
-      monto,
-      tipo
-    } = operacion;
-    str = str +
-      `
+
+  const template = arr.reduce((str, actual) => str + `
     <div class="mi-flex is-flex-direction-row" >
-      <span class="column is-3">${descripcion}</span>
-      <span class="column is-3">${categoria}</span>
-      <span class="column is-2 has-text-right fecha">${fecha}</span>
-      <span class="column is-2 has-text-right ${tipo === 'GANANCIA'? 'green' : 'red'} ">${monto}</span>
+      <span class="column is-3">${actual.descripcion}</span>
+      <span class="column is-3">${actual.categoria}</span>
+      <span class="column is-2 has-text-right fecha">${actual.fecha}</span>
+      <span class="column is-2 has-text-right ${actual.tipo === 'GANANCIA'? 'green' : 'red'} ">${actual.monto}</span>
       <span class="column is-2 has-text-right">
-      <a class="btn-editar" data-id=${id} >Editar</a>
-      <a class="btn-eliminar" data-id=${id} >Borrar</a>
+      <a class="btn-editar" data-id=${actual.id} >Editar</a>
+      <a class="btn-eliminar" data-id=${actual.id} >Borrar</a>
       </span>
-    </div>
+      </div>
+      ` ,'')
+      document.getElementById('operaciones').innerHTML = template;
+  // console.log(template)
+  // let str = ''; // ' 
+  // // se recorre el arr de operaciones por cada operacion
+  // arr.forEach((operacion) => {
+  //   // console.log(operacion)
+  //   // hacemos un destructuring para sacar las propiedades
+  //   const {
+  //     id,
+  //     descripcion,
+  //     categoria,
+  //     fecha,
+  //     monto,
+  //     tipo
+  //   } = operacion;
+  //   str = str +
+  //     `
+    // <div class="mi-flex is-flex-direction-row" >
+    //   <span class="column is-3">${descripcion}</span>
+    //   <span class="column is-3">${categoria}</span>
+    //   <span class="column is-2 has-text-right fecha">${fecha}</span>
+    //   <span class="column is-2 has-text-right ${tipo === 'GANANCIA'? 'green' : 'red'} ">${monto}</span>
+    //   <span class="column is-2 has-text-right">
+    //   <a class="btn-editar" data-id=${id} >Editar</a>
+    //   <a class="btn-eliminar" data-id=${id} >Borrar</a>
+    //   </span>
+    // </div>
     
-    `
-    document.getElementById('operaciones').innerHTML = str;
-  })
+  //   `
+  // })
   const btnsEliminar = document.querySelectorAll('.btn-eliminar');
   const btnsEditar = document.querySelectorAll('.btn-editar');
   // const btnsEliminar = Array.from(document.getElementsByClassName('btn-eliminar'));
@@ -223,6 +359,62 @@ const editarOperacion = arr => {
   editarfechaInput.valueAsDate = new Date(fecha);
 }
 
+filtroOrden.addEventListener('change', () => {
+  if (filtroOrden.value === "MENOR_MONTO") {
+      const menorMonto = operaciones.sort(
+        (a, b) => Number(a.monto) - Number(b.monto)
+      );
+      console.log(menorMonto)
+  }
+  if (filtroOrden.value === "MAYOR_MONTO") {
+      const menorMonto = operaciones.sort(
+        (a, b) => Number(b.monto) - Number(a.monto)
+      );
+      console.log(menorMonto)
+  }
+  if(filtroOrden.value === 'A/Z'){
+    const az = operaciones.sort((a,b) => {
+      if(a.descripcion.toLowerCase() < b.descripcion.toLowerCase()){
+        return -1
+      }
+    })
+  }
+  if(filtroOrden.value === 'Z/A'){
+    const za = operaciones.sort((a,b) => {
+      if(a.descripcion.toLowerCase() > b.descripcion.toLowerCase()){
+        return -1
+      }
+    })
+    console.log(za);
+  }
+  if(filtroOrden.value === 'MAS_RECIENTES'){
+    const reciente = operaciones.sort((a,b) => 
+      new Date(a.fecha) - new Date(b.fecha))
+    console.log(reciente);
+  }
+  // if(filtroOrden.value === 'MENOR_MONTO'){
+  //   const resultMonto = operaciones.sort((a, b) => {
+  //     if(a.monto < b.monto){
+  //       return -1
+  //     }
+  //     if(a.monto >  b.monto){
+  //       return 1
+  //     }
+  //   })
+  // }
+  // if(filtroOrden.value === 'MAYOR_MONTO'){
+  //   const resultMonto = operaciones.sort((a, b) => {
+  //     if(a.monto > b.monto){
+  //       return -1
+  //     }
+  //     if(a.monto <  b.monto){
+  //       return 1
+  //     }
+  //   })
+  //   console.log(resultMonto)
+  // }
+})
+
 
 filtroTipo.addEventListener('change', (e) => {
   if(e.target.value !== 'TODOS'){
@@ -233,6 +425,88 @@ filtroTipo.addEventListener('change', (e) => {
     pintarOperaciones(operaciones)
   }
 })
+
+
+
+
+
+// const numeros = [8,7,4,5,21,3,6,4,9,7,5,9]; //88
+
+// const root = document.getElementById('root');
+
+// const template = numeros.reduce((str, actual, posicion) => str +  `
+//   <div>
+//     <p>El numero en la posición ${posicion} es el: ${actual} </p>
+//   </div>
+//   `
+//   ,'')
+
+  // console.log(template)
+
+// let str = '';
+// for(let i = 0; i < numeros.length; i++){
+//   const actual = numeros[i];
+//   str += 
+// `
+//     <div>
+//       <p>El numero en la posición ${i} es el: ${actual} </p>
+//     </div>
+//   `
+// }
+
+// root.innerHTML = template;
+
+
+
+
+
+
+
+
+
+// const resultado = numeros.reduce((count, actual) => count + actual ,0)
+// console.log(resultado)
+
+// let count = 0; //8, 15, 19, 
+// for(let i = 0; i < numeros.length; i++){
+//   count = count + numeros[i]
+// }
+// console.log(count)
+
+// const letras = ['h', 'o', 'l', 'a', ' ', 'c', 'h', 'i', 'c', 'a', 's' ];
+
+// const palabra = letras.reduce((str, actual) => str + actual ,'');
+// console.log(palabra)
+
+// let str = ''; // 'sda'
+// for(let i = 0; i < letras.length; i++){
+//   const actual = letras[i]
+//   str += actual
+// }
+
+// console.log(str)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 const inicializar = () => {

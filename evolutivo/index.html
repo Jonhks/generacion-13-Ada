@@ -23,7 +23,7 @@
     />
     <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/css/alertify.min.css"/>
 
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/uuid/8.1.0/uuidv4.min.js">
+    <!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/uuid/8.1.0/uuidv4.min.js"> -->
     <link rel="stylesheet" href="./style.css" />
     <title>AhorrADAs</title>
   </head>
@@ -484,6 +484,9 @@
                 </p>
               </div>
             </div>
+            <div id="root">
+              
+            </div>
             <!-- 
               Operaciones
              -->
@@ -532,7 +535,7 @@
                -->
                   <div class="columns is-mobile">
                     <div class="column is-6 has-text-weight-semibold">
-                      Categoría con mayor ganancia
+                      Categoría con mayor 
                     </div>
                     <div class="column is-3 has-text-right">
                       <span
@@ -627,7 +630,7 @@
               Totales por mes
              -->
                 <section class="section">
-                  <h3 class="title is-size-4 mb-5 pb-4">Totales por mes</h3>
+                  <!-- <h3 class="title is-size-4 mb-5 pb-4">Totales por mes</h3> -->
                   <div id="reporte-mes"></div>
                 </section>
               </div>
@@ -636,8 +639,11 @@
         </div>
       </div>
     </section>
+    <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-firestore.js"></script>
     <script src="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/alertify.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/uuid/8.1.0/uuidv4.min.js"></script>
-    <script src="app.js"></script>
+    <script src="./firebase.js"></script>
+    <script src="./app.js"></script>
   </body>
 </html>

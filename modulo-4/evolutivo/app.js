@@ -6,7 +6,6 @@
 // const cancelarBtn = document.getElementById('cancelar-btn')
 // const agregarBtn = document.getElementById('agregar-btn')
 
-
 // agregarBtn.addEventListener('click', (e) => {
 //   e.preventDefault();
 //   console.log(descripcion.value)
@@ -16,6 +15,18 @@
 //   console.log(fecha.value)
 // })
 
+// Leer datos de firabse
+db.collection("operaciones")
+  .onSnapshot((querySnapshot) => {
+    const operacionesFirebase = [];
+    querySnapshot.forEach((doc) => {
+      operacionesFirebase.push({
+        ...doc.data(),
+        idDoc: doc.id
+      });
+    });
+    // console.log(operacionesFirebase)
+  });
 
 const verBalance = document.getElementById('ver-balance')
 const verCategorias = document.getElementById('ver-categorias')
@@ -24,6 +35,7 @@ const verOperacion = document.getElementById('ver-operacion')
 const agregaroperacionBoton = document.getElementById('agregar-operacion-boton')
 const cancelarAgregarOperacionBoton = document.getElementById('cancelar-agregar-operacion-boton')
 const filtroTipo = document.getElementById('filtro-tipo');
+const filtroCategoria = document.getElementById('filtro-categoria');
 
 
 const vistaBalance = document.getElementById('vista-balance')
@@ -57,63 +69,69 @@ const categorias = [
   'comida',
   'servicios',
   'salidas',
-  'educación',
+  'educacion',
   'transporte',
   'trabajo'
 ];
 
-// let operaciones = JSON.parse(localStorage.getItem('operaciones')) || [];
 // const operaciones = [];
-const operaciones = [
-  {
-    id: 0,
-    descripcion: 'Desayuno',
-    monto: 10,
-    categoria: 'comida',
-    tipo: 'GASTO',
-    fecha: '12/07/2022'  // ["12", "07" , "2022"] [1] = 07
-  },
-  {
-    id: 1,
-    descripcion: 'cena',
-    monto: 90,
-    categoria: 'comida',
-    tipo: 'GASTO',
-    fecha: '01/08/2022' //08
-  },
-  {
-    id: 2,
-    descripcion: 'clases',
-    monto: 100,
-    categoria: 'trabajo',
-    tipo: 'GANANCIA',
-    fecha: '23/07/2022' // 07 
-  },
-  {
-    id: 3,
-    descripcion: 'gasolina',
-    monto: 30,
-    categoria: 'transporte',
-    tipo: 'GASTO',
-    fecha: '12/06/2022' //06
-  },
-  {
-    id: 4,
-    descripcion: 'cine',
-    monto: 55,
-    categoria: 'transporte',
-    tipo: 'GASTO',
-    fecha: '8/07/2022' //07 
-  },
-  {
-    id: 5,
-    descripcion: 'sueldo',
-    monto: 1000,
-    categoria: 'transporte',
-    tipo: 'GANANCIA',
-    fecha: '12/08/2022' //08
-  },
-]
+const obtenerOperaciones = () => {
+  // return JSON.parse(localStorage.getItem('operaciones')) || [];
+  return [{
+      id: 0,
+      descripcion: 'Desayuno',
+      monto: 10,
+      categoria: 'comida',
+      tipo: 'GASTO',
+      fecha: '12/07/2022' // ["12", "07" , "2022"] [1] = 07
+    },
+    {
+      id: 1,
+      descripcion: 'cena',
+      monto: 90,
+      categoria: 'comida',
+      tipo: 'GASTO',
+      fecha: '01/08/2022' //08
+    },
+    {
+      id: 2,
+      descripcion: 'clases',
+      monto: 100,
+      categoria: 'trabajo',
+      tipo: 'GANANCIA',
+      fecha: '23/07/2022' // 07 
+    },
+    {
+      id: 3,
+      descripcion: 'gasolina',
+      monto: 30,
+      categoria: 'transporte',
+      tipo: 'GASTO',
+      fecha: '12/06/2022' //06
+    },
+    {
+      id: 4,
+      descripcion: 'cine',
+      monto: 55,
+      categoria: 'transporte',
+      tipo: 'GASTO',
+      fecha: '8/07/2022' //07 
+    },
+    {
+      id: 5,
+      descripcion: 'sueldo',
+      monto: 1000,
+      categoria: 'transporte',
+      tipo: 'GANANCIA',
+      fecha: '12/08/2022' //08
+    },
+  ]
+}
+
+let operaciones = obtenerOperaciones()
+
+
+// let paraFiltrar = [...operaciones]
 
 
 const generarCategorias = () => {
@@ -123,7 +141,7 @@ const generarCategorias = () => {
     selects.innerHTML = '';
     // console.log('select:',select,'posición del select' ,i)
     if (select.classList.contains('filtro-categoria')) {
-      select.innerHTML = '<option>Todas</option>'
+      select.innerHTML = '<option value="TODAS" >Todas</option>'
     }
     for (let j = 0; j < categorias.length; j++) {
       // console.log('categoria actual:', categorias[j], 'Posición de la categoria: ', j)
@@ -165,7 +183,7 @@ verReportes.addEventListener('click', () => {
   vistaCategoria.classList.add('is-hidden')
   vistaReportes.classList.remove('is-hidden')
   vistaBalance.classList.add('is-hidden')
-  if(!operaciones.length){
+  if (!operaciones.length) {
     conReportes.classList.add('is-hidden')
     sinReportes.classList.remove('is-hidden')
   } else {
@@ -179,8 +197,8 @@ verReportes.addEventListener('click', () => {
 const totalPorCategoria = (operaciones, categorias) => {
   categorias.forEach(categoria => { // comida [{}, {}]
     const porCategoria = operaciones.filter(operacion => operacion.categoria === categoria)
-    const porCategoriaGanancia = porCategoria.filter(operacion => operacion.tipo === 'GANANCIA').reduce((count, current) => count + current.monto ,0)
-    const porCategoriaGasto = porCategoria.filter(operacion => operacion.tipo === 'GASTO').reduce((count, current) => count + current.monto ,0)
+    const porCategoriaGanancia = porCategoria.filter(operacion => operacion.tipo === 'GANANCIA').reduce((count, current) => count + current.monto, 0)
+    const porCategoriaGasto = porCategoria.filter(operacion => operacion.tipo === 'GASTO').reduce((count, current) => count + current.monto, 0)
     // console.log(`La categoria ${categoria} su gasto es de: ${porCategoriaGasto}`)
     // console.log(`La categoria ${categoria} su ganacia es de: ${porCategoriaGanancia}`)
     console.log(`El balance de la categoria  ${categoria} es de ${porCategoriaGanancia - porCategoriaGasto}`)
@@ -191,14 +209,14 @@ const totalPorCategoria = (operaciones, categorias) => {
 
 
 const totalPorMes = arr => {
-  const mesesSinRepetir = [...new Set(arr.map(operacion => 
+  const mesesSinRepetir = [...new Set(arr.map(operacion =>
     operacion.fecha.split('/')[1]))].sort()
-  for (let i = 0; i < mesesSinRepetir.length; i++) {  // 06, 07 , 07 , 08 , 07  === 06
+  for (let i = 0; i < mesesSinRepetir.length; i++) { // 06, 07 , 07 , 08 , 07  === 06
     const operacionesPorMes = arr.filter(operacion => operacion.fecha.split('/')[1] === mesesSinRepetir[i])
-    const porTipoGanancia = operacionesPorMes.filter(operacion => 
-      operacion.tipo === 'GANANCIA' ).reduce((count, current) => count + current.monto ,0)
-    const porTipoGasto = operacionesPorMes.filter(operacion => 
-      operacion.tipo === 'GASTO' ).reduce((count, current) => count + current.monto ,0)
+    const porTipoGanancia = operacionesPorMes.filter(operacion =>
+      operacion.tipo === 'GANANCIA').reduce((count, current) => count + current.monto, 0)
+    const porTipoGasto = operacionesPorMes.filter(operacion =>
+      operacion.tipo === 'GASTO').reduce((count, current) => count + current.monto, 0)
     // console.log(`Esto sería del mes ${mesesSinRepetir[i]} tenemos el total de Ganancia de: ${porTipoGanancia}`)
     // console.log(`Esto sería del mes ${mesesSinRepetir[i]} tenemos el total de Gasto de: ${porTipoGasto}`)
   }
@@ -215,30 +233,7 @@ verOperacion.addEventListener('click', () => {
 // .onSnapshot.forEach(doc => console.log(doc))
 // });
 
-db.collection("operaciones")
-    .onSnapshot((querySnapshot) => {
-        // var cities = [];
-        querySnapshot.forEach((doc) => {
-          // console.log(doc.data())
-            // cities.push(doc.data().name);
-        });
-        // console.log("Current cities in CA: ", cities.join(", "));
-    });
-
 agregaroperacionBoton.addEventListener('click', () => {
-  db.collection("operaciones").add({
-    first: "Una",
-    middle: "Mathison", 
-    last: "Turing",
-    born: 1912
-  })
-  .then((docRef) => {
-    console.log("Document written with ID: ", docRef.id);
-  })
-  .catch((error) => {
-    console.error("Error adding document: ", error);
-  });
-
   if (descripcionInput.value.trim().length === 0 || montoInput.value == 0) {
     alertify.error('Todos los campos son necesarios y el monto tiene que ser mayor a 0');
 
@@ -254,6 +249,14 @@ agregaroperacionBoton.addEventListener('click', () => {
     categoria: categoriasSelect.value,
     fecha: fechaInput.value
   }
+
+  db.collection("operaciones").add(operacion)
+    .then((docRef) => {
+      console.log("Document written with ID: ", docRef.id);
+    })
+    .catch((error) => {
+      console.error("Error adding document: ", error);
+    });
   //  agregamos el objeto (operacion) al arreglo de operaciones
   operaciones.push(operacion)
   // escondemos la vista del formulario y mostramos la vista de la lista de operaciones
@@ -292,8 +295,8 @@ const pintarOperaciones = arr => {
       <a class="btn-eliminar" data-id=${actual.id} >Borrar</a>
       </span>
       </div>
-      ` ,'')
-      document.getElementById('operaciones').innerHTML = template;
+      `, '')
+  document.getElementById('operaciones').innerHTML = template;
   // console.log(template)
   // let str = ''; // ' 
   // // se recorre el arr de operaciones por cada operacion
@@ -310,17 +313,17 @@ const pintarOperaciones = arr => {
   //   } = operacion;
   //   str = str +
   //     `
-    // <div class="mi-flex is-flex-direction-row" >
-    //   <span class="column is-3">${descripcion}</span>
-    //   <span class="column is-3">${categoria}</span>
-    //   <span class="column is-2 has-text-right fecha">${fecha}</span>
-    //   <span class="column is-2 has-text-right ${tipo === 'GANANCIA'? 'green' : 'red'} ">${monto}</span>
-    //   <span class="column is-2 has-text-right">
-    //   <a class="btn-editar" data-id=${id} >Editar</a>
-    //   <a class="btn-eliminar" data-id=${id} >Borrar</a>
-    //   </span>
-    // </div>
-    
+  // <div class="mi-flex is-flex-direction-row" >
+  //   <span class="column is-3">${descripcion}</span>
+  //   <span class="column is-3">${categoria}</span>
+  //   <span class="column is-2 has-text-right fecha">${fecha}</span>
+  //   <span class="column is-2 has-text-right ${tipo === 'GANANCIA'? 'green' : 'red'} ">${monto}</span>
+  //   <span class="column is-2 has-text-right">
+  //   <a class="btn-editar" data-id=${id} >Editar</a>
+  //   <a class="btn-eliminar" data-id=${id} >Borrar</a>
+  //   </span>
+  // </div>
+
   //   `
   // })
   const btnsEliminar = document.querySelectorAll('.btn-eliminar');
@@ -328,9 +331,16 @@ const pintarOperaciones = arr => {
   // const btnsEliminar = Array.from(document.getElementsByClassName('btn-eliminar'));
   btnsEliminar.forEach(btn => {
     btn.addEventListener('click', e => {
+      console.log('eliminda')
+      db.collection("operaciones").doc("EFwTsm8V0RdMcODfwGf5").delete()
+        .then(() => {
+          console.log("Document successfully deleted!");
+        }).catch((error) => {
+          console.error("Error removing document: ", error);
+        });
       const arregloSinOperacion = operaciones.filter(operacion => operacion.id !== e.target.dataset.id)
-      localStorage.setItem('operaciones',JSON.stringify(arregloSinOperacion))
-      operaciones = JSON.parse(localStorage.getItem('operaciones'))
+      localStorage.setItem('operaciones', JSON.stringify(arregloSinOperacion))
+      // operaciones = JSON.parse(localStorage.getItem('operaciones'))
       pintarOperaciones(operaciones)
       mostraroperaciones(operaciones)
       alertify.success('Operación eliminada con éxito');
@@ -338,7 +348,7 @@ const pintarOperaciones = arr => {
   })
 
   btnsEditar.forEach(btn => {
-    btn.addEventListener('click',e => {
+    btn.addEventListener('click', e => {
       const operacionParaEditar = operaciones.filter(operacion => operacion.id === e.target.dataset.id);
       editarOperacion(operacionParaEditar)
       editarOperacionBtn.addEventListener('click', () => {
@@ -349,7 +359,13 @@ const pintarOperaciones = arr => {
 }
 
 const editarOperacion = arr => {
-  const {descripcion, monto, tipo, categoria, fecha} = arr[0];
+  const {
+    descripcion,
+    monto,
+    tipo,
+    categoria,
+    fecha
+  } = arr[0];
   vistaBalance.classList.add('is-hidden');
   vistaEditaroperacion.classList.remove('is-hidden');
   editarDescripcionInput.value = descripcion;
@@ -359,76 +375,115 @@ const editarOperacion = arr => {
   editarfechaInput.valueAsDate = new Date(fecha);
 }
 
-filtroOrden.addEventListener('change', () => {
-  if (filtroOrden.value === "MENOR_MONTO") {
-      const menorMonto = operaciones.sort(
-        (a, b) => Number(a.monto) - Number(b.monto)
-      );
-      console.log(menorMonto)
+// filtroOrden.addEventListener('change', () => {
+//   if (filtroOrden.value === "MENOR_MONTO") {
+//       const menorMonto = operaciones.sort(
+//         (a, b) => Number(a.monto) - Number(b.monto)
+//       );
+//       pintarOperaciones(menorMonto)
+//   }
+//   if (filtroOrden.value === "MAYOR_MONTO") {
+//       const menorMonto = operaciones.sort(
+//         (a, b) => Number(b.monto) - Number(a.monto)
+//       );
+//       pintarOperaciones(menorMonto)
+//   }
+//   if(filtroOrden.value === 'A/Z'){
+//     const az = operaciones.sort((a,b) => {
+//       if(a.descripcion.toLowerCase() < b.descripcion.toLowerCase()){
+//         return -1
+//       }
+//     })
+//     pintarOperaciones(az)
+//   }
+//   if(filtroOrden.value === 'Z/A'){
+//     const za = operaciones.sort((a,b) => {
+//       if(a.descripcion.toLowerCase() > b.descripcion.toLowerCase()){
+//         return -1
+//       }
+//     })
+//     pintarOperaciones(za);
+//   }
+//   if(filtroOrden.value === 'MAS_RECIENTES'){
+//     const reciente = operaciones.sort((a,b) => 
+//       new Date(a.fecha) - new Date(b.fecha))
+//     console.log(reciente);
+//   }
+//   // if(filtroOrden.value === 'MENOR_MONTO'){
+//   //   const resultMonto = operaciones.sort((a, b) => {
+//   //     if(a.monto < b.monto){
+//   //       return -1
+//   //     }
+//   //     if(a.monto >  b.monto){
+//   //       return 1
+//   //     }
+//   //   })
+//   // }
+//   // if(filtroOrden.value === 'MAYOR_MONTO'){
+//   //   const resultMonto = operaciones.sort((a, b) => {
+//   //     if(a.monto > b.monto){
+//   //       return -1
+//   //     }
+//   //     if(a.monto <  b.monto){
+//   //       return 1
+//   //     }
+//   //   })
+//   //   console.log(resultMonto)
+//   // }
+// })
+
+
+
+const filtros = (e) => {
+  const porCategoria = filtroCategoria.value;
+  const porTipo = filtroTipo.value;
+  const porOrden =  filtroOrden.value
+
+  let operaciones = obtenerOperaciones();
+
+  if (porCategoria !== 'TODAS') {
+    operaciones = operaciones.filter(operacion => operacion.categoria === porCategoria)
   }
-  if (filtroOrden.value === "MAYOR_MONTO") {
-      const menorMonto = operaciones.sort(
-        (a, b) => Number(b.monto) - Number(a.monto)
-      );
-      console.log(menorMonto)
+
+  if (porTipo !== 'TODOS') {
+    operaciones = operaciones.filter(operacion => operacion.tipo === porTipo)
   }
-  if(filtroOrden.value === 'A/Z'){
-    const az = operaciones.sort((a,b) => {
-      if(a.descripcion.toLowerCase() < b.descripcion.toLowerCase()){
+
+  if (porOrden === "MENOR_MONTO") {
+    operaciones = operaciones.sort(
+      (a, b) => Number(a.monto) - Number(b.monto)
+    );
+  }
+  if (porOrden === "MAYOR_MONTO") {
+    operaciones = operaciones.sort(
+      (a, b) => Number(b.monto) - Number(a.monto)
+    );
+  }
+  if (porOrden === 'A/Z') {
+    operaciones = operaciones.sort((a, b) => {
+      if (a.descripcion.toLowerCase() < b.descripcion.toLowerCase()) {
         return -1
       }
     })
   }
-  if(filtroOrden.value === 'Z/A'){
-    const za = operaciones.sort((a,b) => {
-      if(a.descripcion.toLowerCase() > b.descripcion.toLowerCase()){
+  if (porOrden === 'Z/A') {
+    operaciones = operaciones.sort((a, b) => {
+      if (a.descripcion.toLowerCase() > b.descripcion.toLowerCase()) {
         return -1
       }
     })
-    console.log(za);
   }
-  if(filtroOrden.value === 'MAS_RECIENTES'){
-    const reciente = operaciones.sort((a,b) => 
+  if (porOrden === 'MAS_RECIENTES') {
+    operaciones = operaciones.sort((a, b) =>
       new Date(a.fecha) - new Date(b.fecha))
-    console.log(reciente);
   }
-  // if(filtroOrden.value === 'MENOR_MONTO'){
-  //   const resultMonto = operaciones.sort((a, b) => {
-  //     if(a.monto < b.monto){
-  //       return -1
-  //     }
-  //     if(a.monto >  b.monto){
-  //       return 1
-  //     }
-  //   })
-  // }
-  // if(filtroOrden.value === 'MAYOR_MONTO'){
-  //   const resultMonto = operaciones.sort((a, b) => {
-  //     if(a.monto > b.monto){
-  //       return -1
-  //     }
-  //     if(a.monto <  b.monto){
-  //       return 1
-  //     }
-  //   })
-  //   console.log(resultMonto)
-  // }
-})
+  pintarOperaciones(operaciones)
+}
 
 
-filtroTipo.addEventListener('change', (e) => {
-  if(e.target.value !== 'TODOS'){
-    const porTipo = operaciones.filter(operacion => operacion.tipo === e.target.value)
-    localStorage.setItem('operaciones', porTipo)
-    pintarOperaciones(porTipo)
-  } else {
-    pintarOperaciones(operaciones)
-  }
-})
-
-
-
-
+filtroCategoria.addEventListener('change', filtros)
+filtroTipo.addEventListener('change', filtros)
+filtroOrden.addEventListener('change', filtros)
 
 // const numeros = [8,7,4,5,21,3,6,4,9,7,5,9]; //88
 
@@ -441,7 +496,7 @@ filtroTipo.addEventListener('change', (e) => {
 //   `
 //   ,'')
 
-  // console.log(template)
+// console.log(template)
 
 // let str = '';
 // for(let i = 0; i < numeros.length; i++){
@@ -511,14 +566,13 @@ filtroTipo.addEventListener('change', (e) => {
 
 const inicializar = () => {
   const inputsFecha = document.querySelectorAll('input[type="date"]')
-  inputsFecha.forEach( input => {
+  inputsFecha.forEach(input => {
     input.valueAsDate = new Date()
   })
   mostraroperaciones(operaciones);
   generarCategorias();
   pintarOperaciones(operaciones);
+  // filtros()
 }
 
 window.onload = inicializar
-
-

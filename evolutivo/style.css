@@ -1,0 +1,32 @@
+/* .buttons {
+  justify-content: flex-end;
+}
+.image {
+  max-width: 350px;
+  margin: 0 auto;
+  opacity: 0.8;
+} */
+
+.mi-flex {
+  display: flex;
+}
+
+.green{
+  color: green;
+}
+
+.green::before{
+  content: '+$';
+}
+
+.red{
+  color: red;
+}
+
+.red::before{
+  content: '-$';
+}
+
+.fecha{
+  font-size: .9rem;
+}

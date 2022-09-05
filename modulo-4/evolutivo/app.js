@@ -64,14 +64,37 @@ const editarOperacionBtn = document.getElementById('editar-operacion-boton');
 const conReportes = document.getElementById('con-reportes')
 const sinReportes = document.getElementById('sin-reportes')
 
+// agregar categoria
+
+const categoriaInput = document.querySelector('#categoria-input')
+const agregarCategoriaBoton = document.querySelector('#agregar-categoria-boton')
+
 
 const categorias = [
-  'comida',
-  'servicios',
-  'salidas',
-  'educacion',
-  'transporte',
-  'trabajo'
+  {
+    nombre: 'comida',
+    id: uuidv4()
+  },
+  {
+    nombre: 'servicios',
+    id: uuidv4()
+  },
+  {
+    nombre: 'salidas',
+    id: uuidv4()
+  },
+  {
+    nombre: 'educacion',
+    id: uuidv4()
+  },
+  {
+    nombre: 'transporte',
+    id: uuidv4()
+  },
+  {
+    nombre: 'trabajo',
+    id: uuidv4()
+  }
 ];
 
 // const operaciones = [];
@@ -133,6 +156,14 @@ let operaciones = obtenerOperaciones()
 
 // let paraFiltrar = [...operaciones]
 
+agregarCategoriaBoton.addEventListener('click', () => {
+  categorias.push({
+    nombre: categoriaInput.value,
+    id : uuidv4()
+  })
+  generarCategorias()
+})
+
 
 const generarCategorias = () => {
   const selects = document.getElementsByClassName('categorias-select'); // ["select," "select2"]
@@ -145,7 +176,7 @@ const generarCategorias = () => {
     }
     for (let j = 0; j < categorias.length; j++) {
       // console.log('categoria actual:', categorias[j], 'Posición de la categoria: ', j)
-      select.innerHTML += `<option value=${categorias[j]}>${categorias[j]}</option>`
+      select.innerHTML += `<option value=${categorias[j].nombre}>${categorias[j].nombre}</option>`
     }
   }
 }
@@ -195,16 +226,18 @@ verReportes.addEventListener('click', () => {
 })
 
 const totalPorCategoria = (operaciones, categorias) => {
-  categorias.forEach(categoria => { // comida [{}, {}]
-    const porCategoria = operaciones.filter(operacion => operacion.categoria === categoria)
+  const conBalance = categorias.map(categoria => { // comida [{}, {}]
+    const porCategoria = operaciones.filter(operacion => operacion.categoria === categoria.nombre)
     const porCategoriaGanancia = porCategoria.filter(operacion => operacion.tipo === 'GANANCIA').reduce((count, current) => count + current.monto, 0)
     const porCategoriaGasto = porCategoria.filter(operacion => operacion.tipo === 'GASTO').reduce((count, current) => count + current.monto, 0)
-    // console.log(`La categoria ${categoria} su gasto es de: ${porCategoriaGasto}`)
-    // console.log(`La categoria ${categoria} su ganacia es de: ${porCategoriaGanancia}`)
-    console.log(`El balance de la categoria  ${categoria} es de ${porCategoriaGanancia - porCategoriaGasto}`)
+    console.log(`El balance de la categoria  ${categoria.nombre} es de ${porCategoriaGanancia - porCategoriaGasto}`)
+    return {
+      ...categoria,
+      balance: porCategoriaGanancia - porCategoriaGasto
+    }
   })
-  // console.log(operaciones)
-  // console.log(categorias)
+  const result = conBalance.sort((a,b) => b.balance - a.balance)
+  console.log(result[0])
 }
 
 

@@ -1,0 +1,16 @@
+#firstBox {
+  margin: 50px;
+  padding: 10px;
+}
+#firstBox h1 {
+  color: rgb(120, 13, 13);
+}
+#firstBox p {
+  color: rgb(23, 5, 162);
+}
+#firstBox p span {
+  font-size: 20px;
+  color: violet;
+}
+
+/*# sourceMappingURL=style.css.map */

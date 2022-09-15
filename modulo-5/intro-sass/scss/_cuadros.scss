@@ -1,0 +1,13 @@
+.main{
+  .mixins{
+    .cuadro-1{
+      @include cuadrado(rgb(192, 34, 34), 400px);
+    }
+    .cuadro-2{
+      @include cuadrado($color);
+    }
+    .cuadro-3{
+      @include cuadrado(#444, 150px);
+    }
+  }
+}

@@ -1,0 +1,60 @@
+h1 {
+  color: pink;
+  font-size: 24px;
+}
+
+.main {
+  width: 80%;
+  height: 70vh;
+  border: 1px solid black;
+  background-color: cyan;
+}
+.main .section {
+  width: 50%;
+  height: 30vh;
+  border: 1px solid pink;
+  background-color: blueviolet;
+}
+.main .section .article {
+  width: 25%;
+  background-color: pink;
+}
+.main .section .article .primero {
+  color: red;
+  background-color: black;
+}
+.main .segunda {
+  background-color: black;
+}
+.main .segunda p {
+  color: white;
+}
+.main .segunda .primero {
+  font-size: 30px;
+}
+.main .segunda .segundo {
+  font-size: 40px;
+}
+.main .mixins .cuadro-1 {
+  background-color: rgb(192, 34, 34);
+  width: 400px;
+  height: 200px;
+  margin-top: 5px;
+  padding: 10px;
+}
+.main .mixins .cuadro-2 {
+  background-color: pink;
+  width: 200px;
+  height: 200px;
+  margin-top: 5px;
+  padding: 10px;
+}
+.main .mixins .cuadro-3 {
+  background-color: #444;
+  width: 150px;
+  height: 200px;
+  margin-top: 5px;
+  padding: 10px;
+}
+
+/*# sourceMappingURL=style.css.map */

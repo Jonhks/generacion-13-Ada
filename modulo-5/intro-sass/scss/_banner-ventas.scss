@@ -1,0 +1,42 @@
+
+h1{
+  color: $color;
+  font-size: $tamanio;
+}
+
+.main{
+  width: 80%;
+  height: 70vh;
+  border: 1px solid black;
+  background-color: cyan;
+  .section{
+    width: 50%;
+    height: 30vh;
+    border: 1px solid $color;
+    background-color: blueviolet;
+    .article{
+      width: 25%;
+      background-color: pink;
+      .primero{
+        color: red;
+        background-color: black;
+      }
+    }
+  }
+  .segunda{
+    background-color: black;
+    p{
+      color: white;
+    }
+    .primero{
+      font-size: 30px;
+    }
+    .segundo{
+      font-size: 40px;
+      &:hover{
+        // font-size: 90px;
+        // background-color: red;
+      }
+    }
+  }
+}

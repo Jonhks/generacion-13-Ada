@@ -1,0 +1,16 @@
+{
+  "name": "comics",
+  "version": "1.0.0",
+  "description": "",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "sass": "sass --watch scss/style.scss css/style.css"
+  },
+  "author": "Jonh Parra",
+  "license": "ISC",
+  "dependencies": {
+    "materialize-css": "^1.0.0-rc.2",
+    "sass": "^1.54.9"
+  }
+}

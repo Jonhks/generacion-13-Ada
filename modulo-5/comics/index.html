@@ -23,8 +23,6 @@
       integrity="sha512-+4zCK9k+qNFUR5X+cKL9EIR+ZOhtIloNl9GIKS57V1MyNsYpYcUrUeQc9vNfzsWfV28IaLL3i96P9sdNyeRssA=="
       crossorigin="anonymous"
     />
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
-
     <link rel="stylesheet" href="./css/style.css" />
   </head>
   <body>
@@ -92,14 +90,13 @@
             <h2 class="character-name"></h2>
             <p class="character-description"></p>
           </div>
-          <!-- <img src=${thumbnail.path}${thumbnail.extension} alt=""> -->
         </section>
         <section class="results-section">
           <h2 class="results-title">Resultados</h2>
           <p class="results-count">
             <span class="results-number">0</span> RESULTADOS
           </p>
-          <div class="results" class="results"></div>
+          <div class="results" id="results"></div>
           <div class="pagination">
             <button
               type="button"
@@ -139,7 +136,6 @@
     <footer>
       <div class="column">Hecho con ❤️ por Jonh Parra</div>
     </footer>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
     <script src="./app.js"></script>
   </body>
 </html>
